@@ -1,0 +1,13 @@
+def my_view(request):
+    if request.method == 'POST':
+        form = forms.MyForm(request.POST)
+        if form.is_valid():
+            lat = form.cleaned_data['lat']
+            lon = form.cleaned_data['lon']
+            url = f"https://api.weather.yandex.ru/v2/forecast?lat={lat}&lon={lon}&lang=ru_RU&limit=1&hours=False&extra=False"
+            headers = {'X-Yandex-API-Key': 'cba435bc-4c93-4199-98ce-61eac91e6485'}
+            qs_parser = requests.get(url, headers=headers).json()
+            return render(request, 'core/index.html', {'form': form, 'qs_parser': qs_parser})
+    else:
+        form = forms.MyForm()
+    return render(request, 'core/index.html', {'form': form})

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {{ title }} {% endblock %}</title>
+</head>
+<body>
+    <a href="/">Главная страницы</a>
+    <a href="/converter/">Конвертор</a>
+    <br>{% block content %}{% endblock %}
+</body>
+</html>
